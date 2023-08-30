@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="htmx-config" includeAspNetAntiforgeryToken="true" />
+    <title>@ViewData["Title"] - HTMX</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true" />
+    @await RenderSectionAsync("head", false)
+</head>
+<body class="bg-slate-900 text-slate-300 px-4">
+    <header class="pl-52 text-center">
+        <h1 class="text-2xl pt-2 pb-6 text-purple-300 font-semibold tracking-wide">Testing HTMX</h1>
+    </header>
+
+    <div class="flex">
+        <div class="inset-y-0 left-0 w-52 bg-slate-500 bg-opacity-80 rounded" >
+            <ul class="list-none space-y-2 p-4">
+                @await Html.PartialAsync("NavItem", new NavItem("Hello HTMX", "/"))
+                @await Html.PartialAsync("NavItem", new NavItem("Counter", "/Examples/Counter"))
+                @await Html.PartialAsync("NavItem", new NavItem("Selects", "/Examples/Selects"))
+            </ul>
+        </div>
+        <main role="main" class="mx-auto">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="text-center pl-52 ">
+        &copy; 2023 - Nick 🦄 - <a asp-area="" class="text-purple-400" asp-page="/Privacy">Privacy</a>
+    </footer>
+
+    <script src="~/lib/htmx.min.js"></script>
+    <script src="~/lib/hyperscript.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

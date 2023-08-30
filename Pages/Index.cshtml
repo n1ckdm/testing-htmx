@@ -1,0 +1,21 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Hello HTMX!";
+}
+
+<div class="">
+    <h1 class="text-center text-lg mb-4">@ViewData["Title"]</h1>
+    <p>In this example, we implement our first htmx element with ASP.NET.</p>
+
+    <div class="drop-shadow-lg rounded-lg m-6 p-2 flex flex-col">
+        <h2 class="text-center font-light py-3" id="target">Change Me!</h2>
+        <button
+            class="px-4 py-2 rounded bg-purple-800 text-slate-300 hover:bg-purple-600"
+            hx-get=""
+            hx-target="#target"
+        >
+            Click Me
+        </button>
+    </div>
+</div>

@@ -1,0 +1,34 @@
+@page "/Examples/Selects"
+@model Selects
+
+<div class="">
+    <h1 class="text-center text-lg mb-4">Selects</h1>
+    <p>Here we implement cascading selects, something that would usually be difficult without a UI framework.</p>
+
+    <div class="drop-shadow-lg rounded-lg m-6 p-2 flex flex-col">
+        <form class="flex flex-col mx-auto">
+            <label for="country">Select a cuisine</label>
+            <select
+                asp-for="Cuisine"
+                asp-items="Model.CuisineItems"
+                hx-target="#foods"
+                hx-get="Selects?handler=Foods"
+                class="text-slate-900 p-1 px-3 rounded appearance-none mb-4 w-80"
+            ></select>
+
+            <label for="country">Select a food</label>
+            <select
+                asp-for="Food"
+                id="foods"
+                hx-target="#result"
+                hx-get="Selects?handler=Result"
+                class="text-slate-900 p-1 px-3 rounded appearance-none mb-4 w-80"
+            >
+                <option disabled selected value="">Pick a cuisine first...</option>
+            </select>
+        </form>
+        <div id="result">
+            @await Html.PartialAsync("FoodResult", new FoodResult())
+        </div>
+    </div>
+</div>
