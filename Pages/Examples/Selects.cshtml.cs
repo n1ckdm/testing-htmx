@@ -41,24 +41,24 @@ public class Selects : PageModel
 
     public void OnGet() {}
 
-        public IActionResult OnGetFoods()
+    public IActionResult OnGetFoods()
+    {
+        var html = new StringBuilder();
+        
+        if (Cuisine is { Length: > 0 } cuisine && Cuisines.TryGetValue(cuisine, out var foods))
         {
-            var html = new StringBuilder();
-            
-            if (Cuisine is { Length: > 0 } cuisine && Cuisines.TryGetValue(cuisine, out var foods))
+            html.AppendLine("<option disabled selected>Select a food</option>");
+            foreach (var food in foods) 
             {
-                html.AppendLine("<option disabled selected>Select a food</option>");
-                foreach (var food in foods) 
-                {
-                    html.AppendLine($"<option>{food}</option>");
-                }
+                html.AppendLine($"<option>{food}</option>");
             }
-
-            return Content(html.ToString(), "text/html");
         }
 
-        public IActionResult OnGetResult()
-        {
-            return Partial("FoodResult", new FoodResult(true, Food));
-        }
+        return Content(html.ToString(), "text/html");
+    }
+
+    public IActionResult OnGetResult()
+    {
+        return Partial("FoodResult", new FoodResult(true, Food));
+    }
 }
